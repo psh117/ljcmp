@@ -1,0 +1,11 @@
+dataset
+dataset/**
+old
+
+__pycache__
+*.pyc
+wandb
+result
+
+weights
+weights/**
