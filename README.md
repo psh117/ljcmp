@@ -8,6 +8,39 @@ Latent Jumping Constrained Motion Planning (LJCMP) is a motion planning algorith
 |<img src="images/panda_dual_realtime_planning.gif" alt="realtime_planning_demo" width="300"/> | <img src="images/panda_dual_realworld.gif" alt="realworld_planning_demo" width="300"/>   |
 
 
+## Index
+
+- [Dependencies](#dependencies)
+- [Installation](#installation)
+- [How to train a new model](#how-to-train-a-new-model)
+- [Benchmark](#benchmark)
+
+## Dependencies
+- [ROS](http://wiki.ros.org/ROS/Installation) (Noetic)
+- [MoveIt!](https://moveit.ros.org/install/) 
+- Ubuntu 20.04
+- Python >= 3.7
+- pytorch
+
+
+Under catkin_ws/src, clone the following packages and build them.
+- [suhan_robot_model_tools](https://github.com/psh117/suhan_robot_model_tools)
+    ```sh
+    # set python package
+    cd dir/to/catkin_ws/src/suhan_robot_model_tools
+    pip install -e .
+    ```
+- [dual_panda_moveit_config](https://github.com/psh117/dual_panda_moveit_config) (for Dual Manipulation)
+    ```sh
+    # copy dual panda model
+    cd dir/to/catkin_ws/src/dual_panda_moveit_config/robot_model
+    ./copy_model.sh
+    ```
+- [calibrated_franka_description](https://github.com/psh117/calibrated_franka_description) (for Triple Manipulation)
+- [assembly_env_description](https://github.com/psh117/assembly_env_description) (for Triple Manipulation)
+- [assembly_moveit_config](https://github.com/psh117/assembly_moveit_config) (for Triple Manipulation)
+
+
 ## Installation
 
 ```bash
@@ -192,3 +225,46 @@ pip install -e .
     # --tsa True means using Tangent Space Augmentation
     # -D 10000 means using data_10000.npy as training data
     ``` 
+
+## Benchmark
+1. Download the [benchmarking dataset](https://drive.google.com/file/d/1J8qC-ufGLjQHrloTDw12R6vwMlnhFnVD/view?usp=sharing) to `dataset` directory
+
+2. Download the [pre-trained models](https://drive.google.com/file/d/1J8qC-ufGLjQHrloTDw12R6vwMlnhFnVD/view?usp=sharing) to `model` directory
+
+3. Run benchmarking script
+    - Panda Orientation
+    ```sh
+    # load planning context
+    roslaunch panda_moveit_config planning_context.launch load_robot_description:=true
+
+    # ljcmp root directory
+    python script/benchmark.py -E panda_orientation
+    ```
+
+    - Panda Dual
+    ```sh
+    # load planning context
+    roslaunch dual_panda_moveit_config planning_context.launch load_robot_description:=true
+
+    # ljcmp root directory
+    python script/benchmark.py -E panda_dual
+    ```
+
+    - Panda Dual Orientation
+    ```sh
+    # load planning context
+    roslaunch dual_panda_moveit_config planning_context.launch load_robot_description:=true
+
+    # ljcmp root directory
+    python script/benchmark.py -E panda_dual_orientation
+    ```
+
+
+    - Panda Triple
+    ```sh
+    # load planning context
+    roslaunch assembly_moveit_config planning_context.launch load_robot_description:=true
+
+    # ljcmp root directory
+    python script/benchmark.py -E panda_triple
+    ```
