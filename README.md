@@ -227,9 +227,9 @@ pip install -e .
     ``` 
 
 ## Benchmark
-1. Download the [benchmarking dataset](https://drive.google.com/file/d/1J8qC-ufGLjQHrloTDw12R6vwMlnhFnVD/view?usp=sharing) to `dataset` directory
+1. Download the [benchmarking dataset](https://drive.google.com/file/d/1m6nnp9GOyCLyVnzu--Z5aFgbAtvvQfeu) to `dataset` directory
 
-2. Download the [pre-trained models](https://drive.google.com/file/d/1J8qC-ufGLjQHrloTDw12R6vwMlnhFnVD/view?usp=sharing) to `model` directory
+2. Download the [pre-trained models](https://drive.google.com/file/d/1J8qC-ufGLjQHrloTDw12R6vwMlnhFnVD) to `model` directory
 
 3. Run benchmarking script
     - Panda Orientation
